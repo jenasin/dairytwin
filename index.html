@@ -129,6 +129,9 @@ th{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute
 .icard .ii svg{width:28px;height:28px}.icard b{font-family:Oswald,Arial,sans-serif;font-size:28px;color:var(--dark);line-height:1.1}.icard span{color:var(--muted);font-size:16px}
 section.alt .icard{background:#fff}
 @media (max-width:900px){.icards{grid-template-columns:1fr 1fr}}
+.steps{padding-left:22px;margin:16px 0 22px}.steps li{margin:8px 0;color:#cfd8e6}.steps b{color:#fff}
+.paper{display:block;text-decoration:none;background:#16202e;border:1px solid #2b3a4f;border-left:6px solid #b31b1b;border-radius:12px;padding:14px 18px;color:#e8eef7;transition:transform .2s}
+.paper:hover{transform:translateY(-2px)}.paper span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#ff8a80;font-weight:700}.paper b{display:block;font-size:18px;margin:4px 0}.paper small{color:#9aa7ba;font-size:14px}
 .goal{font-family:Oswald,Arial,sans-serif;font-size:clamp(28px,4vw,44px);line-height:1.2;max-width:980px;margin:16px 0 28px}
 .goal em{font-style:normal;color:var(--gold)}
 .map svg{width:100%;height:auto}
@@ -197,12 +200,20 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
   <div class="stat"><b data-count="8.9" data-prefix="+" data-suffix=" %" data-dec="1">+8.9 %</b><span>best ML model vs reference, held-out data</span></div>
   <div class="stat"><b data-count="124" data-suffix=" / 124">124 / 124</b><span>end-to-end checks · 169 tests pass</span></div>
 </div></div>
-<div class="ticker" aria-label="What the agent checks on every cow"><div class="ticker-label">On every cow</div><div class="ticker-track"><div class="ticker-move"><span class="chip"><i>🥛</i>Milk score vs herd curve</span><span class="chip"><i>🩺</i>Health score</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>🤰</i>Pregnancy status</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>🔁</i>Culling priority</span><span class="chip"><i>📅</i>Expected calving & dry-off</span><span class="chip"><i>🧪</i>Somatic cells</span><span class="chip"><i>🦶</i>Lameness check</span><span class="chip"><i>📈</i>ML milk forecast</span><span class="chip"><i>🔥</i>Ketosis & acidosis risk</span><span class="chip"><i>⏱️</i>Every 4 minutes</span><span class="chip"><i>🥛</i>Milk score vs herd curve</span><span class="chip"><i>🩺</i>Health score</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>🤰</i>Pregnancy status</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>🔁</i>Culling priority</span><span class="chip"><i>📅</i>Expected calving & dry-off</span><span class="chip"><i>🧪</i>Somatic cells</span><span class="chip"><i>🦶</i>Lameness check</span><span class="chip"><i>📈</i>ML milk forecast</span><span class="chip"><i>🔥</i>Ketosis & acidosis risk</span><span class="chip"><i>⏱️</i>Every 4 minutes</span></div></div></div></div></header>
+<div class="ticker" aria-label="What the agent checks on every cow"><div class="ticker-label">On every cow</div><div class="ticker-track"><div class="ticker-move"><span class="chip"><i>🥛</i>Milk score</span><span class="chip"><i>🩺</i>Health check</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>📈</i>ML forecast</span><span class="chip"><i>🥛</i>Milk score</span><span class="chip"><i>🩺</i>Health check</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>📈</i>ML forecast</span><span class="chip"><i>🥛</i>Milk score</span><span class="chip"><i>🩺</i>Health check</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>📈</i>ML forecast</span><span class="chip"><i>🥛</i>Milk score</span><span class="chip"><i>🩺</i>Health check</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>📈</i>ML forecast</span></div></div></div></div></header>
 
 <section class="green" id="goal"><div class="wrap reveal">
   <p class="eyebrow">Our goal</p>
   <p class="goal">Give every dairy farm an <em>AI agent</em> that turns the farm’s own records into <em>daily decisions</em> — more milk, healthier cows and a fairer milk price — <em>without sending a single record to the cloud.</em></p>
   <ul class="ticks"><li>Start from the data the farm already has — no new sensors, no new software for the staff</li><li>Every number checked against history, every recommendation explained</li><li>From one Czech pilot farm to every farm with the same herd software</li></ul>
+</div></section>
+
+<section class="dark" id="workflow"><div class="wrap grid2 rev reveal">
+  <img class="shot" src="img/agentgraph.png" alt="AI agent workflow: message, skill selector with the local LLM, route by tool, tools, explanation">
+  <div><p class="eyebrow" style="color:#7cfc9a">AI workflow</p>
+    <h2>From a question to an action, step by step</h2>
+    <ol class="steps"><li><b>Trigger</b> — every 4 minutes, or a farmer’s question</li><li><b>Skill selector</b> — the local LLM picks the right skill, arguments are schema-checked</li><li><b>Tools</b> — approved Python tools compute on the farm’s data</li><li><b>Answer &amp; plan</b> — alerts, forecasts and a weekly plan, explained</li></ol>
+    <a class="paper" href="https://arxiv.org/abs/2601.01321" target="_blank" rel="noopener"><span>Research foundation · arXiv</span><b>Digital Twin AI: Opportunities and Challenges from Large Language Models to World Models</b><small>Zhou et al., 2026 · arXiv:2601.01321 — the four-stage lifecycle (modeling, mirroring, intervening, autonomous management) DairyTwin follows</small></a></div>
 </div></section>
 
 <section id="advantages" class="alt"><div class="wrap reveal">
@@ -297,7 +308,7 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
 <section><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Generative AI · GAN lab</p>
   <h2>Synthetic cows from 15 956 real milk curves</h2>
-  <p class="muted">A GAN (after Zhou et al. 2026, <i>Digital Twin AI</i>, arXiv:2601.01321) applied to four digital-twin tasks and reported exactly as measured: training models only on synthetic cows works (Ridge 1.83 vs 1.87 kg error), augmentation gives a small gain, a classifier still tells synthetic from real (AUC 0.98), and the anomaly score carries no disease signal.</p>
+  <p class="muted">A GAN (after Zhou et al. 2026, <a href="https://arxiv.org/abs/2601.01321" target="_blank" rel="noopener"><i>Digital Twin AI</i>, arXiv:2601.01321</a>) applied to four digital-twin tasks and reported exactly as measured: training models only on synthetic cows works (Ridge 1.83 vs 1.87 kg error), augmentation gives a small gain, a classifier still tells synthetic from real (AUC 0.98), and the anomaly score carries no disease signal.</p>
   <img class="shot full" src="img/gandiag.png" alt="GAN: generator, discriminator, real and synthetic cows">
   <img class="shot full" src="img/gancharts.png" alt="GAN training losses and real vs synthetic milk curves">
 </div></section>
