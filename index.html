@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DairyTwin — an AI agent and digital twin for dairy farms</title>
+<meta name="description" content="DairyTwin turns a dairy farm's herd-management export into a living digital twin of every cow, the herd and the farm — with realtime alerts, validated ML forecasts, a GAN lab and a local Czech-speaking AI assistant. Runs on a laptop; data never leaves the farm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--dark:#17251c;--green:#2f6b3c;--cream:#f6f1e4;--card:#fffdf7;--ink:#1f2a22;--muted:#5d675b;--gold:#e8c27a;--orange:#b8641a;--line:#e3ddcc}
+*{box-sizing:border-box}
+body{margin:0;font:18px/1.6 "Public Sans",Arial,sans-serif;color:var(--ink);background:var(--cream)}
+a{color:var(--green)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.hero{background:linear-gradient(135deg,var(--dark),var(--green));color:var(--cream);padding:72px 0 64px}
+.eyebrow{font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 12px}
+h1,h2{font-family:Oswald,Arial,sans-serif;font-weight:700;line-height:1.05;margin:0}
+h1{font-size:clamp(48px,9vw,104px)}
+h2{font-size:clamp(32px,5vw,52px);color:var(--dark)}
+.lead{font-size:clamp(19px,2.4vw,24px);max-width:820px;margin:20px 0 32px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:8px}
+.stat b{display:block;font-family:Oswald,Arial,sans-serif;font-size:44px;color:var(--gold);line-height:1}
+.stat span{font-size:15px;color:#cfe3c4}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;text-decoration:none}
+.btn.primary{background:var(--gold);color:var(--dark)}.btn.ghost{border:2px solid var(--gold);color:var(--gold)}
+section{padding:72px 0;border-bottom:1px solid var(--line)}
+section.alt{background:var(--card)}
+section.dark{background:#0d1420;color:#e8eef7}section.dark h2{color:#fff}section.dark .muted{color:#9aa7ba}
+.grid2{display:grid;grid-template-columns:1fr 1.25fr;gap:40px;align-items:center}
+.grid2.rev{grid-template-columns:1.25fr 1fr}
+.shot{width:100%;height:auto;border-radius:14px;box-shadow:0 12px 40px rgba(23,37,28,.18);border:1px solid var(--line);background:#fff}
+section.dark .shot{border-color:#1f2a3a;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.full{margin-top:28px}
+.muted{color:var(--muted)}
+ul.ticks{padding:0;list-style:none}ul.ticks li{padding-left:28px;position:relative;margin:8px 0}
+ul.ticks li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+section.dark ul.ticks li::before{color:#2ee59d}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;border-top:6px solid var(--green)}
+.card:nth-child(2){border-top-color:#d9822b}.adv .card b.big{font-size:24px;margin-bottom:6px}.card:nth-child(3){border-top-color:#b3241b}.card:nth-child(4){border-top-color:#3d7fb0}
+.card b.big{display:block;font-family:Oswald,Arial,sans-serif;font-size:32px;color:var(--dark)}
+.pill{display:inline-block;font-size:13px;font-weight:700;border-radius:999px;padding:2px 10px;margin-right:6px}
+.ok{background:#e1f0dd;color:#21572c}.warn{background:#fbecd2;color:#7a4a12}.bad{background:#f7dcd8;color:#8a2318}
+table{width:100%;border-collapse:collapse;font-size:16px;margin-top:20px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+code,pre{font-family:ui-monospace,Menlo,monospace}
+pre{background:var(--dark);color:#e8f2e6;padding:18px;border-radius:12px;overflow-x:auto;font-size:15px}
+footer{padding:40px 0;font-size:15px;color:var(--muted)}
+.author{display:flex;gap:28px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 30px rgba(23,37,28,.08);max-width:760px}
+.avatar{flex:0 0 132px;width:132px;height:132px;object-fit:cover;border:4px solid var(--gold);border-radius:50%;background:linear-gradient(135deg,var(--dark),var(--green));color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:Oswald,Arial,sans-serif;font-size:44px;font-weight:700}
+.btn.li{background:#0a66c2;color:#fff}.btn.web{background:var(--dark);color:var(--gold)}.author-btns{display:flex;gap:8px;flex-wrap:wrap}.ai-role{display:inline-block;margin:8px 0 0;background:linear-gradient(90deg,#2f6b3c,#3d7fb0);color:#fff;font-weight:700;border-radius:999px;padding:4px 14px;font-size:15px;letter-spacing:.02em}.btn.ghost2{border:2px solid var(--green);color:var(--green)}
+@media (max-width:600px){.author{flex-direction:column;text-align:center}}
+@media (max-width:860px){.grid2,.grid2.rev{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Agro Pitch Brussels · built on real data of a Czech dairy farm</p>
+  <h1>DairyTwin</h1>
+  <p class="lead"><b>An AI agent for the dairy farm</b>, running on a digital twin of every cow, every herd and the whole farm. It watches the herd every 4 minutes, forecasts milk and money, and tells the farmer what to do next month — in plain Czech. Built and validated on <b>10 years of real records from ZBIROŽSKÁ a.s.</b>, a Czech farm. It runs on a laptop; the data never leaves the farm.</p>
+  <div class="stats">
+    <div class="stat"><b>1 892</b><span>animals mirrored, end of every day</span></div>
+    <div class="stat"><b>4 min</b><span>realtime check animal → herd → farm</span></div>
+    <div class="stat"><b>+8.9 %</b><span>best ML model vs reference, held-out data</span></div>
+    <div class="stat"><b>124 / 124</b><span>end-to-end checks · 169 tests pass</span></div>
+  </div>
+  <div class="btns"><a class="btn primary" href="#advantages">Key advantages</a><a class="btn ghost" href="#impact">Impact</a><a class="btn ghost" href="#screens">See the screens</a></div>
+</div></header>
+
+<section id="advantages" class="alt"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Key advantages</p>
+  <h2>An AI agent the farmer can trust</h2>
+  <div class="cards adv">
+    <div class="card"><b class="big">AI agent, not a chatbot</b>Autonomous agents check every cow, herd and the farm every 4 minutes, raise alerts and build a weekly action plan. The farmer asks in Czech; the agent picks approved tools and Python does the maths — it cannot invent numbers.</div>
+    <div class="card"><b class="big">Real farm, real data</b>Built on 10 years of the farm’s own herd-management records: 2.96 million rows, 1.98 million milkings, 415 000 events — no sensors to buy, works with what the farm already has.</div>
+    <div class="card"><b class="big">Validated, not promised</b>Every forecast is backtested on later data the models never saw; 169 automated tests and 124 end-to-end checks pass. Every number is labelled observation, model or scenario.</div>
+    <div class="card"><b class="big">Private and local</b>Runs on one laptop with a local LLM (Qwen3 14B). No farm record goes to a cloud; only the public EU milk price is fetched.</div>
+  </div>
+</div></section>
+
+<section id="impact"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Impact — computed on the pilot farm’s data</p>
+  <h2>What it changes for one farm, next month</h2>
+  <div class="cards">
+    <div class="card"><b class="big">+219 000 CZK</b>per month for every +0.50 CZK/kg — the agent shows the value of renegotiating the price or changing the milk buyer (438 t/month).</div>
+    <div class="card"><b class="big">+82 kg/day</b>by replacing 23 open cows that will give less than a fresh heifer, with 19 heifers calving this month.</div>
+    <div class="card"><b class="big">≈ 81 kg/day</b>lost to subclinical mastitis in 57 cows — found, named and turned into a 4-week udder-health plan.</div>
+    <div class="card"><b class="big">≈ 39 pregnancies</b>from synchronising 72 open cows past the herd’s waiting period — calvings and milk from month 10.</div>
+  </div>
+  <div class="cards">
+    <div class="card"><b class="big">Minutes, not days</b>The farm’s state, problems and plan are ready every 4 minutes instead of spreadsheet work.</div>
+    <div class="card"><b class="big">Healthier herd</b>Early warnings for milk drops, lameness and mastitis clusters; antibiotic withdrawal tracked so treated milk stays out of the tank.</div>
+    <div class="card"><b class="big">Fair to the farmer</b>Costs are not in the export and are not deducted; every effect says whether it comes from data, literature or a scenario.</div>
+    <div class="card"><b class="big">Scales to every farm</b>Any farm with the same herd software can run it at home; benchmarks across farms without sharing raw data.</div>
+  </div>
+</div></section>
+
+<section class="dark"><div class="wrap grid2">
+  <div><p class="eyebrow" style="color:#2ee59d">Real reference farm</p>
+    <h2>ZBIROŽSKÁ a.s. · Czech Republic</h2>
+    <p class="muted">A traditional agricultural enterprise in Zbiroh, in the heart of the Křivoklátsko region, farming since 1978: crop production and livestock — cattle, pigs, turkeys and sheep — with a focus on product quality and animal welfare. DairyTwin was built and validated on its real dairy records.</p>
+    <ul class="ticks"><li>1 892 animals present at the export, 837 cows, 709 lactating</li><li>1.98 million individual milkings (2016–2026), monthly milk recording</li><li>415 000 herd events: moves, inseminations, calvings, treatments</li></ul>
+    <div class="btns"><a class="btn primary" href="https://www.youtube.com/watch?v=J5WvtL44jSM">▶ Watch the video</a><a class="btn ghost" href="https://www.zbirozska.cz">zbirozska.cz</a></div></div>
+  <img class="shot" src="img/hierarchy.png" alt="The real herd of the pilot farm: farm, herds and every cow">
+</div></section>
+
+<section><div class="wrap grid2">
+  <div><p class="eyebrow" style="color:var(--orange)">The problem</p>
+    <h2>The farm records everything. The answers still come from spreadsheets.</h2>
+    <p class="muted">Every milking, insemination, calving, move and treatment is already in the herd software. Yet the everyday questions — how much will we milk, which cows have a problem, should we cull or renegotiate the milk price — are answered by hand. Generic chatbots invent numbers and cannot see the farm’s data, and herd records must not go to a cloud.</p></div>
+  <img class="shot" src="img/overview.png" alt="Physical farm and digital twin with the four-stage lifecycle: modeling, mirroring, intervening, autonomous management">
+</div></section>
+
+<section class="alt" id="screens"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Realtime · animal → herd → farm</p>
+  <h2>Every cow is an icon. Herds and the farm are their sums.</h2>
+  <p class="muted">Agents recompute the state every 4 minutes: per cow a milk score (vs the herd lactation curve at her days in milk), a health score, antibiotic withdrawal and a culling priority; per herd the autonomously detected problems; for the farm the state and the alerts. Each result is stored with its time <i>t</i>.</p>
+  <img class="shot full" src="img/hierarchy.png" alt="Hierarchy map: farm on top, herds below, every cow as a coloured icon">
+</div></section>
+
+<section class="dark"><div class="wrap grid2 rev">
+  <img class="shot" src="img/bodymap.png" alt="Neon body map of the herd's average cow with OK, watch and problem by body system">
+  <div><p class="eyebrow" style="color:#2ee59d">Health by body part</p>
+    <h2>Is the herd OK?</h2>
+    <p class="muted">The herd’s “average cow” — and every single cow — scanned by body system from monthly milk recording, diagnoses and treatments.</p>
+    <p><span class="pill ok">7 OK</span><span class="pill warn">2 watch</span><span class="pill bad">1 problem</span></p>
+    <ul class="ticks"><li>Rumen: 36 % of cows have fat/protein &lt; 1.0 — acidosis risk</li><li>Udder: 22 % of cows over 200k somatic cells</li><li>No sensor in the data (activity, climate) is shown grey — never as OK</li></ul></div>
+</div></section>
+
+<section><div class="wrap grid2">
+  <div><p class="eyebrow" style="color:var(--orange)">One cow</p>
+    <h2>Six answers around one cow</h2>
+    <p class="muted">Milk vs the herd curve, health, antibiotics, reproduction, culling priority and the ML forecast — plus her lactation timeline: calving, the herd’s voluntary waiting period (learned from the data), heats, inseminations, pregnancy, expected dry-off and calving.</p></div>
+  <img class="shot" src="img/cowinfo.png" alt="Cow infographic with reproduction timeline">
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Analytics · 3 days · 1 month · 6 months</p>
+  <h2>Milk, money and the herd — then what to do about it</h2>
+  <img class="shot full" src="img/outlook.png" alt="Outlook: milk price, milk volume, revenue, lactating cows">
+  <img class="shot full" src="img/poster.png" alt="Strategy poster: now, next month, long term">
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Improve · next month</p>
+  <h2>Four strategies, week by week</h2>
+  <div class="cards">
+    <div class="card"><b class="big">+82 kg/day</b>Cull 23 open cows that will give less over 90 days than a fresh heifer; 19 heifers calve this month.</div>
+    <div class="card"><b class="big">+219 000 CZK</b>per month for +0.50 CZK/kg — renegotiate or change the milk buyer.</div>
+    <div class="card"><b class="big">57 cows</b>over 200k somatic cells, ≈ 81 kg/day lost — udder-health programme.</div>
+    <div class="card"><b class="big">≈ 39</b>pregnancies from synchronising 72 open cows past the waiting period.</div>
+  </div>
+  <p class="muted" style="margin-top:16px">Each strategy names the cows, the weekly actions, the effect and whether it comes from the data, a literature coefficient or a scenario. Costs are not in the export and are not deducted.</p>
+  <img class="shot full" src="img/plan.png" alt="Improvement plan cards with weekly actions">
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <p class="eyebrow" style="color:#4a55a2">Machine learning · strict time split</p>
+  <h2>All four milk models beat the reference on data they never saw</h2>
+  <p class="muted">Ridge regression, random forest, gradient boosting (LightGBM-style) and an MLP neural network, trained before 30 April 2026 and validated on six later cutoffs: 4.5 % to 8.9 % lower error than the 7-day mean. The disease-risk model reaches AUC 0.57 and is shown as experimental.</p>
+  <table>
+    <tr><th>Model</th><th>Task</th><th>3 days</th><th>7 days</th><th>30 days</th><th>Status</th></tr>
+    <tr><td><b>Ridge regression</b></td><td>milk yield</td><td>+4.5 %</td><td>+7.0 %</td><td>+7.6 %</td><td><span class="pill ok">validated</span></td></tr>
+    <tr><td><b>Random forest</b></td><td>milk yield</td><td><b>+6.1 %</b></td><td>+7.2 %</td><td>+8.8 %</td><td><span class="pill ok">validated</span></td></tr>
+    <tr><td><b>Gradient boosting</b></td><td>milk yield</td><td>+5.7 %</td><td><b>+7.6 %</b></td><td><b>+8.9 %</b></td><td><span class="pill ok">validated</span></td></tr>
+    <tr><td><b>Neural network (MLP)</b></td><td>milk yield</td><td>+4.9 %</td><td>+6.2 %</td><td>+8.3 %</td><td><span class="pill ok">validated</span></td></tr>
+    <tr><td><b>Logistic regression</b></td><td>disease risk 30 d</td><td colspan="3">AUC 0.57 · top-10 % lift ×1.6</td><td><span class="pill warn">experimental</span></td></tr>
+  </table>
+  <p class="muted" style="margin-top:8px">Improvement = lower mean absolute error than the reference (mean of the last 7 valid days), on held-out cutoffs after training.</p>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Generative AI · GAN lab</p>
+  <h2>Synthetic cows from 15 956 real milk curves</h2>
+  <p class="muted">A GAN (after Zhou et al. 2026, <i>Digital Twin AI</i>, arXiv:2601.01321) applied to four digital-twin tasks and reported exactly as measured: training models only on synthetic cows works (Ridge 1.83 vs 1.87 kg error), augmentation gives a small gain, a classifier still tells synthetic from real (AUC 0.98), and the anomaly score carries no disease signal.</p>
+  <img class="shot full" src="img/gandiag.png" alt="GAN: generator, discriminator, real and synthetic cows">
+  <img class="shot full" src="img/gancharts.png" alt="GAN training losses and real vs synthetic milk curves">
+</div></section>
+
+<section class="alt"><div class="wrap grid2 rev">
+  <img class="shot" src="img/agentgraph.png" alt="Agent graph: message, skill selector with Qwen3, route by tool, tools, explanation">
+  <div><p class="eyebrow" style="color:var(--orange)">The AI agent</p>
+    <h2>Ask in Czech. The agent acts, Python does the maths.</h2>
+    <ul class="ticks"><li>Qwen3 14B runs locally (Ollama), no farm data leaves the machine</li><li>Picks one of 39 approved tools and 60 skills; arguments are schema-checked</li><li>Every screen shows its skill workflow; <i>Test run</i> executes it step by step</li><li>A new capability = a JSON manifest + a Markdown skill, no prompt change</li></ul></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Why the numbers can be trusted</p>
+  <h2>Validated against history — and on every screen</h2>
+  <table>
+    <tr><th>Check</th><th>Result</th></tr>
+    <tr><td>Automated tests (formulas with hand-checked reference examples, acceptance, SQL guard, agents, ML, GAN)</td><td><b>169 passed</b></td></tr>
+    <tr><td>End-to-end validation of the running app (22 APIs, all 14 screens in a browser, same numbers everywhere)</td><td><b>124 / 124</b></td></tr>
+    <tr><td>Backtests use only data entered by each cutoff (no hindsight)</td><td><b>yes</b></td></tr>
+    <tr><td>Twin state = independent reconstruction, animal by animal</td><td><b>1 892 / 1 892</b></td></tr>
+  </table>
+  <p class="muted" style="margin-top:16px"><b>Honest limits:</b> the export has no activity, climate or feed sensors; costs are not deducted; the 6-month outlook and the risk model are labelled as estimates. Every number is labelled observation, model estimate or scenario, and missing data is shown as missing, never as zero.</p>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">How it runs</p>
+  <h2>One laptop, on the farm</h2>
+  <p class="muted">The application runs locally on a Mac: Python · SQLite (read-only) · FastAPI · NumPy · scikit-learn · Ollama + Qwen3 14B · vanilla JavaScript with hand-drawn SVG. It reads the farm’s herd-management export; no farm record leaves the farm. The software is a private pilot and is not published — demo on request.</p>
+</div></section>
+
+<section class="alt" id="author"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange)">Made by</p>
+  <div class="author">
+    <img class="avatar" src="img/jan_saro.jpg" alt="Jan Saro">
+    <div><h2 style="font-size:40px">Jan Saro</h2>
+      <p class="ai-role">Applied AI &amp; Precision Livestock Farming</p>
+      <p class="muted" style="margin:6px 0 14px">Author of DairyTwin — AI agents, machine learning and digital twins for dairy farms. Speaker at the AI in Higher Education Summit, ESCP Business School, Paris 2026.</p>
+      <div class="author-btns"><a class="btn li" href="https://www.linkedin.com/in/jansaro/" target="_blank" rel="noopener">in&nbsp; LinkedIn</a>
+      <a class="btn web" href="https://jenasin.github.io/personal-website/" target="_blank" rel="noopener">🌐 Website</a>
+      </div></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">DairyTwin · AI agent and digital twin for dairy farms · Agro Pitch Brussels 2026 · real data of ZBIROŽSKÁ a.s., Czech Republic · by <a href="https://jenasin.github.io/personal-website/">Jan Saro</a> (Applied AI) · <a href="https://www.linkedin.com/in/jansaro/">LinkedIn</a></div></footer>
+</body>
+</html>
