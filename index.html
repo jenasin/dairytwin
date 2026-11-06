@@ -4,73 +4,198 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DairyTwin — an AI agent and digital twin for dairy farms</title>
-<meta name="description" content="DairyTwin turns a dairy farm's herd-management export into a living digital twin of every cow, the herd and the farm — with realtime alerts, validated ML forecasts, a GAN lab and a local Czech-speaking AI assistant. Runs on a laptop; data never leaves the farm.">
+<meta name="description" content="DairyTwin is an AI agent running on a digital twin of every cow, herd and farm — realtime alerts, validated ML forecasts and a next-month action plan, built on real data of a Czech dairy farm in Central Bohemia. Runs on a laptop; data never leaves the farm.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Public+Sans:wght@400;600;700&display=swap">
 <style>
 :root{--dark:#17251c;--green:#2f6b3c;--cream:#f6f1e4;--card:#fffdf7;--ink:#1f2a22;--muted:#5d675b;--gold:#e8c27a;--orange:#b8641a;--line:#e3ddcc}
 *{box-sizing:border-box}
-body{margin:0;font:18px/1.6 "Public Sans",Arial,sans-serif;color:var(--ink);background:var(--cream)}
+html{scroll-behavior:smooth}
+body{margin:0;font:18px/1.6 "Public Sans",Arial,sans-serif;color:var(--ink);background:var(--cream);overflow-x:hidden}
 a{color:var(--green)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-header.hero{background:linear-gradient(135deg,var(--dark),var(--green));color:var(--cream);padding:72px 0 64px}
+header.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--dark),var(--green));color:var(--cream);padding:64px 0 140px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
 .eyebrow{font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 12px}
 h1,h2{font-family:Oswald,Arial,sans-serif;font-weight:700;line-height:1.05;margin:0}
-h1{font-size:clamp(48px,9vw,104px)}
+h1{font-size:clamp(48px,8vw,96px)}
 h2{font-size:clamp(32px,5vw,52px);color:var(--dark)}
-.lead{font-size:clamp(19px,2.4vw,24px);max-width:820px;margin:20px 0 32px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:8px}
-.stat b{display:block;font-family:Oswald,Arial,sans-serif;font-size:44px;color:var(--gold);line-height:1}
+.lead{font-size:clamp(18px,2.1vw,22px);margin:18px 0 26px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:30px}
+.stat b{display:block;font-family:Oswald,Arial,sans-serif;font-size:42px;color:var(--gold);line-height:1}
 .stat span{font-size:15px;color:#cfe3c4}
-.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
-.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;text-decoration:none}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
 .btn.primary{background:var(--gold);color:var(--dark)}.btn.ghost{border:2px solid var(--gold);color:var(--gold)}
+.live{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-size:14px;margin-bottom:16px}
+.live i{width:9px;height:9px;border-radius:50%;background:#7cfc9a;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,252,154,.7)}70%{box-shadow:0 0 0 10px rgba(124,252,154,0)}100%{box-shadow:0 0 0 0 rgba(124,252,154,0)}}
+/* cow in nature illustration */
+.nature{width:100%;height:auto;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:rise 1.2s ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
+.cloud{animation:drift linear infinite}.cloud.c1{animation-duration:60s}.cloud.c2{animation-duration:85s;animation-delay:-40s}.cloud.c3{animation-duration:110s;animation-delay:-70s}
+@keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(860px)}}
+.sun{animation:sunglow 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes sunglow{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.sway{animation:sway 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom center}.sway.d2{animation-delay:-1.1s}.sway.d3{animation-delay:-2.2s}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+.graze{animation:graze 5s ease-in-out infinite;transform-box:fill-box;transform-origin:15% 20%}
+@keyframes graze{0%,35%,100%{transform:rotate(0)}50%,80%{transform:rotate(24deg)}}
+.tail{animation:tail 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:top center}
+@keyframes tail{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+.bird{animation:fly 26s linear infinite}@keyframes fly{from{transform:translate(-80px,0)}50%{transform:translate(320px,-20px)}to{transform:translate(720px,10px)}}
+.butterfly{animation:flutter 9s ease-in-out infinite}@keyframes flutter{0%,100%{transform:translate(0,0)}25%{transform:translate(40px,-25px)}50%{transform:translate(80px,0)}75%{transform:translate(30px,20px)}}
+.hero-visual{position:relative;padding:0 0 70px 0}
+.me{position:absolute;right:-14px;bottom:0;width:42%;margin:0;border-radius:22px;overflow:hidden;border:5px solid var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.45);animation:floaty 6s ease-in-out infinite, rise 1.4s .3s ease-out both;background:#fff}
+.me img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.me figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(13,20,32,.85));color:#fff;font-weight:700;font-size:14px;padding:22px 10px 8px;text-align:center}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(1.5deg)}50%{transform:translateY(-10px) rotate(-1deg)}}
+.bubble{position:absolute;left:4%;bottom:6px;background:#fffdf7;color:var(--dark);border-radius:18px;padding:12px 16px;font-size:15px;box-shadow:0 12px 30px rgba(0,0,0,.35);max-width:58%;animation:pop .6s 1.6s cubic-bezier(.2,1.6,.4,1) both, floaty 7s 2.2s ease-in-out infinite}
+.bubble::after{content:"";position:absolute;right:-10px;top:40%;border:10px solid transparent;border-left-color:#fffdf7}
+.bubble span{font-size:13px;color:var(--muted)}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@media (max-width:900px){.me{width:46%}.bubble{max-width:70%}}
+/* walking cows along the bottom of the hero */
+.pasture{position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none}
+.pasture .grass{position:absolute;left:0;right:0;bottom:0;height:46px;background:#8fb996;border-radius:60% 60% 0 0/40px 40px 0 0;opacity:.9}
+.walker{position:absolute;bottom:30px;width:110px;animation:walk linear infinite}
+.walker svg{width:100%;height:auto;animation:bob .9s ease-in-out infinite}
+.walker.w1{animation-duration:38s;animation-delay:-4s}.walker.w2{animation-duration:46s;animation-delay:-22s;width:90px}.walker.w3{animation-duration:54s;animation-delay:-36s;width:76px}
+@keyframes walk{from{left:-140px}to{left:calc(100% + 40px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 section{padding:72px 0;border-bottom:1px solid var(--line)}
 section.alt{background:var(--card)}
 section.dark{background:#0d1420;color:#e8eef7}section.dark h2{color:#fff}section.dark .muted{color:#9aa7ba}
+section.green{background:linear-gradient(135deg,var(--dark),var(--green));color:var(--cream)}section.green h2{color:var(--cream)}section.green .muted{color:#cfe3c4}
 .grid2{display:grid;grid-template-columns:1fr 1.25fr;gap:40px;align-items:center}
 .grid2.rev{grid-template-columns:1.25fr 1fr}
-.shot{width:100%;height:auto;border-radius:14px;box-shadow:0 12px 40px rgba(23,37,28,.18);border:1px solid var(--line);background:#fff}
+.shot{width:100%;height:auto;border-radius:14px;box-shadow:0 12px 40px rgba(23,37,28,.18);border:1px solid var(--line);background:#fff;transition:transform .4s}
+.shot:hover{transform:scale(1.015)}
 section.dark .shot{border-color:#1f2a3a;box-shadow:0 12px 40px rgba(0,0,0,.5)}
 .full{margin-top:28px}
 .muted{color:var(--muted)}
 ul.ticks{padding:0;list-style:none}ul.ticks li{padding-left:28px;position:relative;margin:8px 0}
 ul.ticks li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
-section.dark ul.ticks li::before{color:#2ee59d}
+section.dark ul.ticks li::before,section.green ul.ticks li::before{color:#7cfc9a}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;border-top:6px solid var(--green)}
-.card:nth-child(2){border-top-color:#d9822b}.adv .card b.big{font-size:24px;margin-bottom:6px}.card:nth-child(3){border-top-color:#b3241b}.card:nth-child(4){border-top-color:#3d7fb0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;border-top:6px solid var(--green);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(23,37,28,.12)}
+.card:nth-child(2){border-top-color:#d9822b}.card:nth-child(3){border-top-color:#b3241b}.card:nth-child(4){border-top-color:#3d7fb0}
 .card b.big{display:block;font-family:Oswald,Arial,sans-serif;font-size:32px;color:var(--dark)}
+.adv .card b.big{font-size:24px;margin-bottom:6px}
 .pill{display:inline-block;font-size:13px;font-weight:700;border-radius:999px;padding:2px 10px;margin-right:6px}
 .ok{background:#e1f0dd;color:#21572c}.warn{background:#fbecd2;color:#7a4a12}.bad{background:#f7dcd8;color:#8a2318}
 table{width:100%;border-collapse:collapse;font-size:16px;margin-top:20px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-code,pre{font-family:ui-monospace,Menlo,monospace}
-pre{background:var(--dark);color:#e8f2e6;padding:18px;border-radius:12px;overflow-x:auto;font-size:15px}
+.goal{font-family:Oswald,Arial,sans-serif;font-size:clamp(28px,4vw,44px);line-height:1.2;max-width:980px;margin:16px 0 28px}
+.goal em{font-style:normal;color:var(--gold)}
+.map svg{width:100%;height:auto}
+.map .cz{fill:#1f2a3a;stroke:#7cfc9a;stroke-width:2.5}
+.map .stc{fill:#2f6b3c;animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.7}50%{opacity:1}}
+.map .ring{fill:none;stroke:#e8c27a;stroke-width:3;animation:ring 2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes ring{from{transform:scale(.4);opacity:1}to{transform:scale(2.4);opacity:0}}
+.author{display:flex;gap:28px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 30px rgba(23,37,28,.08);max-width:780px}
+.avatar{flex:0 0 132px;width:132px;height:132px;object-fit:cover;border:4px solid var(--gold);border-radius:50%}
+.ai-role{display:inline-block;margin:8px 0 0;background:linear-gradient(90deg,#2f6b3c,#3d7fb0);color:#fff;font-weight:700;border-radius:999px;padding:4px 14px;font-size:15px}
+.btn.li{background:#0a66c2;color:#fff}
 footer{padding:40px 0;font-size:15px;color:var(--muted)}
-.author{display:flex;gap:28px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 30px rgba(23,37,28,.08);max-width:760px}
-.avatar{flex:0 0 132px;width:132px;height:132px;object-fit:cover;border:4px solid var(--gold);border-radius:50%;background:linear-gradient(135deg,var(--dark),var(--green));color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:Oswald,Arial,sans-serif;font-size:44px;font-weight:700}
-.btn.li{background:#0a66c2;color:#fff}.btn.web{background:var(--dark);color:var(--gold)}.author-btns{display:flex;gap:8px;flex-wrap:wrap}.ai-role{display:inline-block;margin:8px 0 0;background:linear-gradient(90deg,#2f6b3c,#3d7fb0);color:#fff;font-weight:700;border-radius:999px;padding:4px 14px;font-size:15px;letter-spacing:.02em}.btn.ghost2{border:2px solid var(--green);color:var(--green)}
-@media (max-width:600px){.author{flex-direction:column;text-align:center}}
-@media (max-width:860px){.grid2,.grid2.rev{grid-template-columns:1fr}}
+.speaker{display:grid;grid-template-columns:1.3fr .8fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 14px 40px rgba(23,37,28,.12)}
+.sp-text{padding:40px}.sp-text h2{font-size:clamp(40px,5vw,60px)}
+.sp-bio{margin:14px 0 18px}
+.sp-facts{display:grid;gap:10px;margin-bottom:6px}.sp-facts div{border-left:5px solid #c0392b;background:#fff;border-radius:8px;padding:8px 14px}
+.sp-facts span{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c0392b;font-weight:700}.sp-facts b{font-size:17px}
+.sp-photo{width:100%;height:100%;object-fit:cover;min-height:420px}
+.btn.outline{border:2px solid var(--dark);color:var(--dark)}
+@media (max-width:900px){.speaker{grid-template-columns:1fr}.sp-photo{min-height:320px;max-height:520px}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media (max-width:900px){.hero-grid,.grid2,.grid2.rev{grid-template-columns:1fr}.author{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
-<header class="hero"><div class="wrap">
-  <p class="eyebrow">Agro Pitch Brussels · built on real data of a Czech dairy farm</p>
-  <h1>DairyTwin</h1>
-  <p class="lead"><b>An AI agent for the dairy farm</b>, running on a digital twin of every cow, every herd and the whole farm. It watches the herd every 4 minutes, forecasts milk and money, and tells the farmer what to do next month — in plain Czech. Built and validated on <b>10 years of real records from ZBIROŽSKÁ a.s.</b>, a Czech farm. It runs on a laptop; the data never leaves the farm.</p>
-  <div class="stats">
-    <div class="stat"><b>1 892</b><span>animals mirrored, end of every day</span></div>
-    <div class="stat"><b>4 min</b><span>realtime check animal → herd → farm</span></div>
-    <div class="stat"><b>+8.9 %</b><span>best ML model vs reference, held-out data</span></div>
-    <div class="stat"><b>124 / 124</b><span>end-to-end checks · 169 tests pass</span></div>
+<header class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="live"><i></i> agents checking the herd every 4 minutes</span>
+    <p class="eyebrow">Agro Pitch Brussels · real data of a Czech dairy farm</p>
+    <h1>DairyTwin</h1>
+    <p class="lead"><b>An AI agent for the dairy farm</b>, running on a digital twin of every cow, every herd and the whole farm. It watches the herd, forecasts milk and money, and tells the farmer what to do next month — in plain Czech. Built and validated on <b>10 years of real records of a dairy farm in Central Bohemia, Czech Republic</b>. It runs on a laptop; the data never leaves the farm.</p>
+    <div class="btns"><a class="btn primary" href="#goal">Our goal</a><a class="btn ghost" href="#impact">Impact</a><a class="btn ghost" href="#screens">See the screens</a></div>
   </div>
-  <div class="btns"><a class="btn primary" href="#advantages">Key advantages</a><a class="btn ghost" href="#impact">Impact</a><a class="btn ghost" href="#screens">See the screens</a></div>
+  <div class="hero-visual"><svg class="nature" viewBox="0 0 560 400" role="img" aria-label="A cow grazing on a green pasture under a summer sky">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f2"/><stop offset="1" stop-color="#eef7ea"/></linearGradient>
+      <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ccc8a"/><stop offset="1" stop-color="#7fb06e"/></linearGradient>
+      <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fa35f"/><stop offset="1" stop-color="#4f8f4a"/></linearGradient>
+      <radialGradient id="sunG"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".6" stop-color="#f5c451"/><stop offset="1" stop-color="#f5c451" stop-opacity="0"/></radialGradient>
+      <clipPath id="frame"><rect width="560" height="400" rx="24"/></clipPath>
+    </defs>
+    <g clip-path="url(#frame)">
+      <rect width="560" height="400" fill="url(#sky)"/>
+      <circle class="sun" cx="455" cy="78" r="70" fill="url(#sunG)"/><circle cx="455" cy="78" r="30" fill="#f7cf5f"/>
+      <g class="cloud c1" opacity=".95"><ellipse cx="80" cy="70" rx="46" ry="16" fill="#fff"/><ellipse cx="105" cy="58" rx="30" ry="18" fill="#fff"/><ellipse cx="62" cy="60" rx="22" ry="14" fill="#fff"/></g>
+      <g class="cloud c2" opacity=".85"><ellipse cx="40" cy="120" rx="36" ry="12" fill="#fff"/><ellipse cx="58" cy="110" rx="22" ry="13" fill="#fff"/></g>
+      <g class="cloud c3" opacity=".9"><ellipse cx="20" cy="40" rx="30" ry="10" fill="#fff"/><ellipse cx="36" cy="32" rx="18" ry="11" fill="#fff"/></g>
+      <g class="bird" fill="none" stroke="#3b4a40" stroke-width="2.4" stroke-linecap="round"><path d="M20 100q8-8 16 0q8-8 16 0"/><path d="M60 88q6-6 12 0q6-6 12 0"/></g>
+      <path d="M0 230 Q120 170 250 210 T560 190 V400 H0Z" fill="url(#hill1)"/>
+      <g fill="#3f7a3a"><circle cx="70" cy="200" r="22"/><circle cx="92" cy="192" r="18"/><rect x="76" y="210" width="6" height="20" fill="#6b4a2f"/>
+        <circle cx="500" cy="186" r="26"/><circle cx="476" cy="194" r="18"/><rect x="494" y="200" width="7" height="24" fill="#6b4a2f"/></g>
+      <path d="M0 290 Q160 240 300 270 T560 260 V400 H0Z" fill="url(#hill2)"/>
+      <path d="M360 262 h190 M360 280 h190" stroke="#8a5a3b" stroke-width="4"/>
+      <g fill="#8a5a3b"><rect x="370" y="250" width="6" height="40"/><rect x="420" y="250" width="6" height="40"/><rect x="470" y="250" width="6" height="40"/><rect x="520" y="250" width="6" height="40"/></g>
+      <!-- the cow -->
+      <g transform="translate(150,232)">
+        <ellipse cx="120" cy="128" rx="120" ry="12" fill="#2f5a2c" opacity=".35"/>
+        <g class="tail"><path d="M222 30 c18 10 14 50 6 74" stroke="#2b2b2b" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M226 100 c-8 4 -8 16 2 18 c6 -6 6 -14 -2 -18z" fill="#2b2b2b"/></g>
+        <rect x="60" y="80" width="18" height="46" rx="7" fill="#fffdf7" stroke="#2b2b2b" stroke-width="3"/><rect x="88" y="82" width="18" height="44" rx="7" fill="#f1ede3" stroke="#2b2b2b" stroke-width="3"/>
+        <rect x="170" y="80" width="18" height="46" rx="7" fill="#fffdf7" stroke="#2b2b2b" stroke-width="3"/><rect x="196" y="78" width="18" height="46" rx="7" fill="#f1ede3" stroke="#2b2b2b" stroke-width="3"/>
+        <path d="M58 120h22M86 120h22M168 120h22M194 120h22" stroke="#2b2b2b" stroke-width="8"/>
+        <rect x="50" y="10" width="178" height="84" rx="38" fill="#fffdf7" stroke="#2b2b2b" stroke-width="3"/>
+        <path d="M88 22c20-12 46-4 44 18s-34 28-46 12-14-22 2-30zM160 20c18-6 34 6 28 24s-30 18-34 2 -4-22 6-26zM120 66c14-4 30 2 26 14s-24 10-30 4-6-14 4-18z" fill="#2b2b2b"/>
+        <path d="M150 92c0 14 10 22 20 22s20-8 20-22z" fill="#f2a7a0" stroke="#d97f78" stroke-width="2.5"/>
+        <g class="graze">
+          <path d="M60 40 C40 40 26 46 18 56" stroke="#2b2b2b" stroke-width="3" fill="#fffdf7"/>
+          <ellipse cx="38" cy="30" rx="16" ry="8" transform="rotate(-20 38 30)" fill="#fffdf7" stroke="#2b2b2b" stroke-width="3"/>
+          <path d="M18 22c-2-10 4-16 12-18M44 18c4-9 12-12 20-10" stroke="#e8dcc0" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <rect x="-6" y="20" width="56" height="60" rx="24" fill="#fffdf7" stroke="#2b2b2b" stroke-width="3"/>
+          <path d="M-2 28c10-8 24-6 28 6-10 6-22 4-28-6z" fill="#2b2b2b"/>
+          <rect x="-14" y="58" width="44" height="30" rx="14" fill="#f2a7a0" stroke="#2b2b2b" stroke-width="3"/>
+          <circle cx="0" cy="72" r="3" fill="#2b2b2b"/><circle cx="16" cy="72" r="3" fill="#2b2b2b"/>
+          <circle cx="14" cy="44" r="5" fill="#2b2b2b"/><circle cx="15.5" cy="42.5" r="1.6" fill="#fff"/>
+          <path d="M2 98 l6-18 6 18" stroke="#3f8a3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </g>
+      </g>
+      <g fill="#3f8a3a"><path class="sway" d="M40 380 l6-34 6 34z"/><path class="sway d2" d="M58 382 l5-28 5 28z"/><path class="sway d3" d="M480 384 l6-32 6 32z"/><path class="sway" d="M500 386 l5-26 5 26z"/><path class="sway d2" d="M300 388 l5-24 5 24z"/></g>
+      <g fill="#fff"><circle cx="110" cy="360" r="5"/><circle cx="250" cy="372" r="4"/><circle cx="430" cy="364" r="5"/></g><g fill="#f5c451"><circle cx="110" cy="360" r="2"/><circle cx="250" cy="372" r="1.6"/><circle cx="430" cy="364" r="2"/></g>
+      <g class="butterfly" transform="translate(330,170)"><path d="M0 0 c-10 -12 -18 -2 -8 6z M0 0 c10 -12 18 -2 8 6z" fill="#e8823a"/><rect x="-1" y="-4" width="2" height="12" fill="#3b2b20"/></g>
+    </g>
+  </svg>
+    <figure class="me"><img src="img/jan_saro_fw.jpg" alt="Jan Šáro, author of DairyTwin"><figcaption>Jan Šáro · Applied AI</figcaption></figure>
+    <div class="bubble">Hi, I’m your farm’s <b>AI agent</b> 🐄<br><span>837 cows checked · 6 alerts · plan ready</span></div>
+  </div>
+</div>
+<div class="wrap"><div class="stats">
+  <div class="stat"><b data-count="1892">1 892</b><span>animals mirrored, end of every day</span></div>
+  <div class="stat"><b data-count="4" data-suffix=" min">4 min</b><span>realtime check animal → herd → farm</span></div>
+  <div class="stat"><b data-count="8.9" data-prefix="+" data-suffix=" %" data-dec="1">+8.9 %</b><span>best ML model vs reference, held-out data</span></div>
+  <div class="stat"><b data-count="124" data-suffix=" / 124">124 / 124</b><span>end-to-end checks · 169 tests pass</span></div>
+</div></div>
+<div class="pasture" aria-hidden="true"><div class="grass"></div>
+  <div class="walker w1"><svg viewBox="0 0 120 80"><g fill="#fffdf7" stroke="#1f2a22" stroke-width="2.5"><rect x="18" y="26" width="68" height="32" rx="15"/><rect x="25" y="52" width="7" height="20" rx="3"/><rect x="37" y="52" width="7" height="20" rx="3"/><rect x="64" y="52" width="7" height="20" rx="3"/><rect x="76" y="52" width="7" height="20" rx="3"/><rect x="88" y="14" width="22" height="24" rx="10"/></g><path d="M34 32c6-4 14-2 15 4s-6 10-12 8-8-8-3-12zM62 30c5-1 9 3 8 8s-7 6-10 2-3-9 2-10z" fill="#1f2a22"/><rect x="96" y="28" width="18" height="13" rx="6.5" fill="#f2a7a0" stroke="#1f2a22" stroke-width="2"/><circle cx="99" cy="22" r="2.4" fill="#1f2a22"/><path d="M52 57c0 6 4 9 8 9s8-3 8-9z" fill="#f2a7a0"/></svg></div>
+  <div class="walker w2"><svg viewBox="0 0 120 80"><g fill="#fffdf7" stroke="#1f2a22" stroke-width="2.5"><rect x="18" y="26" width="68" height="32" rx="15"/><rect x="25" y="52" width="7" height="20" rx="3"/><rect x="37" y="52" width="7" height="20" rx="3"/><rect x="64" y="52" width="7" height="20" rx="3"/><rect x="76" y="52" width="7" height="20" rx="3"/><rect x="88" y="14" width="22" height="24" rx="10"/></g><path d="M40 29c7 0 10 6 6 10s-12 2-11-3 1-7 5-7zM64 40c4-2 9 1 8 5s-7 5-9 1 0-5 1-6z" fill="#8a5a3b"/><rect x="96" y="28" width="18" height="13" rx="6.5" fill="#f2a7a0" stroke="#1f2a22" stroke-width="2"/><circle cx="99" cy="22" r="2.4" fill="#1f2a22"/></svg></div>
+  <div class="walker w3"><svg viewBox="0 0 120 80"><g fill="#fffdf7" stroke="#1f2a22" stroke-width="2.5"><rect x="18" y="26" width="68" height="32" rx="15"/><rect x="25" y="52" width="7" height="20" rx="3"/><rect x="37" y="52" width="7" height="20" rx="3"/><rect x="64" y="52" width="7" height="20" rx="3"/><rect x="76" y="52" width="7" height="20" rx="3"/><rect x="88" y="14" width="22" height="24" rx="10"/></g><path d="M28 30c8-3 12 4 9 10s-11 3-11-2 0-7 2-8zM52 40c6-3 12 0 11 6s-9 6-12 2-2-6 1-8z" fill="#1f2a22"/><rect x="96" y="28" width="18" height="13" rx="6.5" fill="#f2a7a0" stroke="#1f2a22" stroke-width="2"/><circle cx="99" cy="22" r="2.4" fill="#1f2a22"/></svg></div>
 </div></header>
 
-<section id="advantages" class="alt"><div class="wrap">
+<section class="green" id="goal"><div class="wrap reveal">
+  <p class="eyebrow">Our goal</p>
+  <p class="goal">Give every dairy farm an <em>AI agent</em> that turns the farm’s own records into <em>daily decisions</em> — more milk, healthier cows and a fairer milk price — <em>without sending a single record to the cloud.</em></p>
+  <ul class="ticks"><li>Start from the data the farm already has — no new sensors, no new software for the staff</li><li>Every number checked against history, every recommendation explained</li><li>From one Czech pilot farm to every farm with the same herd software</li></ul>
+</div></section>
+
+<section id="advantages" class="alt"><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Key advantages</p>
   <h2>An AI agent the farmer can trust</h2>
   <div class="cards adv">
@@ -81,7 +206,7 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
   </div>
 </div></section>
 
-<section id="impact"><div class="wrap">
+<section id="impact"><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Impact — computed on the pilot farm’s data</p>
   <h2>What it changes for one farm, next month</h2>
   <div class="cards">
@@ -98,31 +223,41 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
   </div>
 </div></section>
 
-<section class="dark"><div class="wrap grid2">
-  <div><p class="eyebrow" style="color:#2ee59d">Real reference farm</p>
-    <h2>ZBIROŽSKÁ a.s. · Czech Republic</h2>
-    <p class="muted">A traditional agricultural enterprise in Zbiroh, in the heart of the Křivoklátsko region, farming since 1978: crop production and livestock — cattle, pigs, turkeys and sheep — with a focus on product quality and animal welfare. DairyTwin was built and validated on its real dairy records.</p>
-    <ul class="ticks"><li>1 892 animals present at the export, 837 cows, 709 lactating</li><li>1.98 million individual milkings (2016–2026), monthly milk recording</li><li>415 000 herd events: moves, inseminations, calvings, treatments</li></ul>
-    <div class="btns"><a class="btn primary" href="https://www.youtube.com/watch?v=J5WvtL44jSM">▶ Watch the video</a><a class="btn ghost" href="https://www.zbirozska.cz">zbirozska.cz</a></div></div>
-  <img class="shot" src="img/hierarchy.png" alt="The real herd of the pilot farm: farm, herds and every cow">
+<section class="dark"><div class="wrap grid2 reveal">
+  <div><p class="eyebrow" style="color:#7cfc9a">Real pilot farm</p>
+    <h2>A dairy farm in Central Bohemia, Czech Republic</h2>
+    <p class="muted">DairyTwin was built and validated on the real records of a traditional mixed farm in the Central Bohemian Region — crops and livestock, several barns, a milking herd with individual milk meters. The farm stays anonymous; its data stays on its own computer.</p>
+    <ul class="ticks"><li>1 892 animals present, 837 cows, 709 lactating</li><li>1.98 million individual milkings (2016–2026), monthly milk recording</li><li>415 000 herd events: moves, inseminations, calvings, treatments</li></ul></div>
+  <div class="map">
+    <svg viewBox="0 0 700 430" role="img" aria-label="Map of the Czech Republic with the Central Bohemian Region highlighted">
+      <path class="cz" d="M9,147 L50,124 L95,112 L150,85 L230,50 L265,31 L300,31 L330,62 L380,70 L425,84 L440,116 L485,119 L510,136 L570,140 L585,186 L640,194 L685,264 L655,267 L610,326 L565,365 L510,365 L495,400 L455,373 L395,373 L300,342 L270,400 L200,400 L165,357 L140,318 L90,279 L45,225 L40,178 Z"/>
+      <path class="stc" d="M150,147 L190,116 L240,101 L300,124 L345,163 L340,209 L315,256 L260,271 L200,271 L165,240 L140,194 Z"/>
+      <circle cx="242" cy="171" r="7" fill="#fffdf7" stroke="#0d1420" stroke-width="2"/>
+      <text x="254" y="168" font-family="Public Sans, Arial" font-size="18" fill="#fffdf7" font-weight="700">Prague</text>
+      <circle class="ring" cx="226" cy="222" r="14"/><circle cx="226" cy="222" r="10" fill="#e8c27a" stroke="#0d1420" stroke-width="2.5"/>
+      <text x="360" y="292" font-family="Oswald, Arial" font-size="26" fill="#e8c27a">Central Bohemian Region</text>
+      <text x="360" y="320" font-family="Public Sans, Arial" font-size="17" fill="#cfd8e6">pilot dairy farm · region only, not the exact site</text>
+      <text x="470" y="60" font-family="Oswald, Arial" font-size="30" fill="#9aa7ba">CZECH REPUBLIC</text>
+    </svg>
+  </div>
 </div></section>
 
-<section><div class="wrap grid2">
+<section><div class="wrap grid2 reveal">
   <div><p class="eyebrow" style="color:var(--orange)">The problem</p>
     <h2>The farm records everything. The answers still come from spreadsheets.</h2>
     <p class="muted">Every milking, insemination, calving, move and treatment is already in the herd software. Yet the everyday questions — how much will we milk, which cows have a problem, should we cull or renegotiate the milk price — are answered by hand. Generic chatbots invent numbers and cannot see the farm’s data, and herd records must not go to a cloud.</p></div>
-  <img class="shot" src="img/overview.png" alt="Physical farm and digital twin with the four-stage lifecycle: modeling, mirroring, intervening, autonomous management">
+  <img class="shot" src="img/overview.png" alt="Physical farm and digital twin with the four-stage lifecycle">
 </div></section>
 
-<section class="alt" id="screens"><div class="wrap">
+<section class="alt" id="screens"><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Realtime · animal → herd → farm</p>
   <h2>Every cow is an icon. Herds and the farm are their sums.</h2>
-  <p class="muted">Agents recompute the state every 4 minutes: per cow a milk score (vs the herd lactation curve at her days in milk), a health score, antibiotic withdrawal and a culling priority; per herd the autonomously detected problems; for the farm the state and the alerts. Each result is stored with its time <i>t</i>.</p>
+  <p class="muted">Agents recompute the state every 4 minutes: per cow a milk score, a health score, antibiotic withdrawal and a culling priority; per herd the autonomously detected problems; for the farm the state and the alerts. Each result is stored with its time <i>t</i>.</p>
   <img class="shot full" src="img/hierarchy.png" alt="Hierarchy map: farm on top, herds below, every cow as a coloured icon">
 </div></section>
 
-<section class="dark"><div class="wrap grid2 rev">
-  <img class="shot" src="img/bodymap.png" alt="Neon body map of the herd's average cow with OK, watch and problem by body system">
+<section class="dark"><div class="wrap grid2 rev reveal">
+  <img class="shot" src="img/bodymap.png" alt="Neon body map of the herd's average cow">
   <div><p class="eyebrow" style="color:#2ee59d">Health by body part</p>
     <h2>Is the herd OK?</h2>
     <p class="muted">The herd’s “average cow” — and every single cow — scanned by body system from monthly milk recording, diagnoses and treatments.</p>
@@ -130,37 +265,30 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
     <ul class="ticks"><li>Rumen: 36 % of cows have fat/protein &lt; 1.0 — acidosis risk</li><li>Udder: 22 % of cows over 200k somatic cells</li><li>No sensor in the data (activity, climate) is shown grey — never as OK</li></ul></div>
 </div></section>
 
-<section><div class="wrap grid2">
+<section><div class="wrap grid2 reveal">
   <div><p class="eyebrow" style="color:var(--orange)">One cow</p>
     <h2>Six answers around one cow</h2>
-    <p class="muted">Milk vs the herd curve, health, antibiotics, reproduction, culling priority and the ML forecast — plus her lactation timeline: calving, the herd’s voluntary waiting period (learned from the data), heats, inseminations, pregnancy, expected dry-off and calving.</p></div>
+    <p class="muted">Milk vs the herd curve, health, antibiotics, reproduction, culling priority and the ML forecast — plus her lactation timeline: calving, the herd’s waiting period (learned from the data), heats, inseminations, pregnancy, expected dry-off and calving.</p></div>
   <img class="shot" src="img/cowinfo.png" alt="Cow infographic with reproduction timeline">
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section class="alt"><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Analytics · 3 days · 1 month · 6 months</p>
   <h2>Milk, money and the herd — then what to do about it</h2>
   <img class="shot full" src="img/outlook.png" alt="Outlook: milk price, milk volume, revenue, lactating cows">
   <img class="shot full" src="img/poster.png" alt="Strategy poster: now, next month, long term">
 </div></section>
 
-<section><div class="wrap">
+<section><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Improve · next month</p>
   <h2>Four strategies, week by week</h2>
-  <div class="cards">
-    <div class="card"><b class="big">+82 kg/day</b>Cull 23 open cows that will give less over 90 days than a fresh heifer; 19 heifers calve this month.</div>
-    <div class="card"><b class="big">+219 000 CZK</b>per month for +0.50 CZK/kg — renegotiate or change the milk buyer.</div>
-    <div class="card"><b class="big">57 cows</b>over 200k somatic cells, ≈ 81 kg/day lost — udder-health programme.</div>
-    <div class="card"><b class="big">≈ 39</b>pregnancies from synchronising 72 open cows past the waiting period.</div>
-  </div>
-  <p class="muted" style="margin-top:16px">Each strategy names the cows, the weekly actions, the effect and whether it comes from the data, a literature coefficient or a scenario. Costs are not in the export and are not deducted.</p>
+  <p class="muted">Each strategy names the cows, the weekly actions, the effect and whether it comes from the data, a literature coefficient or a scenario.</p>
   <img class="shot full" src="img/plan.png" alt="Improvement plan cards with weekly actions">
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section class="alt"><div class="wrap reveal">
   <p class="eyebrow" style="color:#4a55a2">Machine learning · strict time split</p>
   <h2>All four milk models beat the reference on data they never saw</h2>
-  <p class="muted">Ridge regression, random forest, gradient boosting (LightGBM-style) and an MLP neural network, trained before 30 April 2026 and validated on six later cutoffs: 4.5 % to 8.9 % lower error than the 7-day mean. The disease-risk model reaches AUC 0.57 and is shown as experimental.</p>
   <table>
     <tr><th>Model</th><th>Task</th><th>3 days</th><th>7 days</th><th>30 days</th><th>Status</th></tr>
     <tr><td><b>Ridge regression</b></td><td>milk yield</td><td>+4.5 %</td><td>+7.0 %</td><td>+7.6 %</td><td><span class="pill ok">validated</span></td></tr>
@@ -172,7 +300,7 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
   <p class="muted" style="margin-top:8px">Improvement = lower mean absolute error than the reference (mean of the last 7 valid days), on held-out cutoffs after training.</p>
 </div></section>
 
-<section><div class="wrap">
+<section><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Generative AI · GAN lab</p>
   <h2>Synthetic cows from 15 956 real milk curves</h2>
   <p class="muted">A GAN (after Zhou et al. 2026, <i>Digital Twin AI</i>, arXiv:2601.01321) applied to four digital-twin tasks and reported exactly as measured: training models only on synthetic cows works (Ridge 1.83 vs 1.87 kg error), augmentation gives a small gain, a classifier still tells synthetic from real (AUC 0.98), and the anomaly score carries no disease signal.</p>
@@ -180,14 +308,14 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
   <img class="shot full" src="img/gancharts.png" alt="GAN training losses and real vs synthetic milk curves">
 </div></section>
 
-<section class="alt"><div class="wrap grid2 rev">
+<section class="alt"><div class="wrap grid2 rev reveal">
   <img class="shot" src="img/agentgraph.png" alt="Agent graph: message, skill selector with Qwen3, route by tool, tools, explanation">
   <div><p class="eyebrow" style="color:var(--orange)">The AI agent</p>
     <h2>Ask in Czech. The agent acts, Python does the maths.</h2>
-    <ul class="ticks"><li>Qwen3 14B runs locally (Ollama), no farm data leaves the machine</li><li>Picks one of 39 approved tools and 60 skills; arguments are schema-checked</li><li>Every screen shows its skill workflow; <i>Test run</i> executes it step by step</li><li>A new capability = a JSON manifest + a Markdown skill, no prompt change</li></ul></div>
+    <ul class="ticks"><li>Qwen3 14B runs locally, no farm data leaves the machine</li><li>Picks one of 39 approved tools and 60 skills; arguments are schema-checked</li><li>Every screen shows its skill workflow; <i>Test run</i> executes it step by step</li><li>A new capability = a JSON manifest + a Markdown skill, no prompt change</li></ul></div>
 </div></section>
 
-<section><div class="wrap">
+<section><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Why the numbers can be trusted</p>
   <h2>Validated against history — and on every screen</h2>
   <table>
@@ -197,28 +325,45 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
     <tr><td>Backtests use only data entered by each cutoff (no hindsight)</td><td><b>yes</b></td></tr>
     <tr><td>Twin state = independent reconstruction, animal by animal</td><td><b>1 892 / 1 892</b></td></tr>
   </table>
-  <p class="muted" style="margin-top:16px"><b>Honest limits:</b> the export has no activity, climate or feed sensors; costs are not deducted; the 6-month outlook and the risk model are labelled as estimates. Every number is labelled observation, model estimate or scenario, and missing data is shown as missing, never as zero.</p>
+  <p class="muted" style="margin-top:16px"><b>Honest limits:</b> the export has no activity, climate or feed sensors; costs are not deducted; the 6-month outlook and the risk model are labelled as estimates.</p>
 </div></section>
 
-<section class="alt"><div class="wrap">
-  <p class="eyebrow" style="color:var(--orange)">How it runs</p>
-  <h2>One laptop, on the farm</h2>
-  <p class="muted">The application runs locally on a Mac: Python · SQLite (read-only) · FastAPI · NumPy · scikit-learn · Ollama + Qwen3 14B · vanilla JavaScript with hand-drawn SVG. It reads the farm’s herd-management export; no farm record leaves the farm. The software is a private pilot and is not published — demo on request.</p>
+<section class="green"><div class="wrap reveal">
+  <p class="eyebrow">For farms and partners</p>
+  <h2>A commercial product — pilots and licences on request</h2>
+  <p class="muted" style="max-width:860px">DairyTwin runs locally on the farm’s own laptop: Python, a read-only database, local machine learning and a local LLM. The software is proprietary and not published; we offer pilots for dairy farms and licences for partners. Live demo on request.</p>
+  <div class="btns"><a class="btn primary" href="https://www.linkedin.com/in/jansaro/" target="_blank" rel="noopener">Request a demo</a></div>
 </div></section>
 
-<section class="alt" id="author"><div class="wrap">
+<section class="alt" id="author"><div class="wrap reveal">
   <p class="eyebrow" style="color:var(--orange)">Made by</p>
-  <div class="author">
-    <img class="avatar" src="img/jan_saro.jpg" alt="Jan Saro">
-    <div><h2 style="font-size:40px">Jan Saro</h2>
+  <div class="speaker">
+    <div class="sp-text">
+      <h2>Jan Šáro</h2>
       <p class="ai-role">Applied AI &amp; Precision Livestock Farming</p>
-      <p class="muted" style="margin:6px 0 14px">Author of DairyTwin — AI agents, machine learning and digital twins for dairy farms. Speaker at the AI in Higher Education Summit, ESCP Business School, Paris 2026.</p>
-      <div class="author-btns"><a class="btn li" href="https://www.linkedin.com/in/jansaro/" target="_blank" rel="noopener">in&nbsp; LinkedIn</a>
-      <a class="btn web" href="https://jenasin.github.io/personal-website/" target="_blank" rel="noopener">🌐 Website</a>
-      </div></div>
+      <p class="sp-bio">Researcher and lecturer at the <b>Czech University of Life Sciences Prague</b>, specialising in applied mathematics, informatics and artificial intelligence for the life sciences. His goal is to bridge the gap between advanced scientific methods and their practical use on farms — equipping the next generation of farmers with AI tools they can trust.</p>
+      <div class="sp-facts">
+        <div><span>Falling Walls Lab · speaker</span><b>Breaking the Wall of Dairy Farmer AI Assistant</b></div>
+        <div><span>Speaker · Paris 2026</span><b>AI in Higher Education Summit, ESCP Business School</b></div>
+      </div>
+      <div class="btns"><a class="btn li" href="https://www.linkedin.com/in/jansaro/" target="_blank" rel="noopener">in&nbsp; Connect on LinkedIn</a>
+        <a class="btn outline" href="https://www.falling-walls.cz/speakers/speakers-2024/" target="_blank" rel="noopener">Falling Walls profile</a></div>
+    </div>
+    <img class="sp-photo" src="img/jan_saro_fw.jpg" alt="Jan Šáro with a laptop">
   </div>
 </div></section>
 
-<footer><div class="wrap">DairyTwin · AI agent and digital twin for dairy farms · Agro Pitch Brussels 2026 · real data of ZBIROŽSKÁ a.s., Czech Republic · by <a href="https://jenasin.github.io/personal-website/">Jan Saro</a> (Applied AI) · <a href="https://www.linkedin.com/in/jansaro/">LinkedIn</a></div></footer>
+<footer><div class="wrap">DairyTwin · AI agent and digital twin for dairy farms · Agro Pitch Brussels 2026 · real data of a dairy farm in Central Bohemia, Czech Republic · by Jan Šáro · <a href="https://www.linkedin.com/in/jansaro/">LinkedIn</a></div></footer>
+
+<script>
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+document.querySelectorAll("[data-count]").forEach(el => {
+  const to = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), pre = el.dataset.prefix || "", suf = el.dataset.suffix || "", t0 = performance.now(), dur = 1600;
+  const fmt = v => pre + v.toLocaleString("en-US", {minimumFractionDigits: dec, maximumFractionDigits: dec}).replace(/,/g, " ") + suf;
+  const step = now => { const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * e); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+});
+</script>
 </body>
 </html>
