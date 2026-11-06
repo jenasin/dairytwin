@@ -14,7 +14,7 @@ html{scroll-behavior:smooth}
 body{margin:0;font:18px/1.6 "Public Sans",Arial,sans-serif;color:var(--ink);background:var(--cream);overflow-x:hidden}
 a{color:var(--green)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-header.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--dark),var(--green));color:var(--cream);padding:64px 0 140px}
+header.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--dark),var(--green));color:var(--cream);padding:64px 0 110px}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
 .eyebrow{font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 12px}
 h1,h2{font-family:Oswald,Arial,sans-serif;font-weight:700;line-height:1.05;margin:0}
@@ -73,6 +73,14 @@ h2{font-size:clamp(32px,5vw,52px);color:var(--dark)}
 .bubble span{font-size:13px;color:var(--muted)}
 @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 @media (max-width:900px){.me{width:46%}.bubble{max-width:70%}}
+.ticker{position:absolute;left:0;right:0;bottom:22px;display:flex;align-items:center;gap:14px;padding-left:20px}
+.ticker-label{flex:0 0 auto;font:700 13px "Public Sans",Arial;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:rgba(0,0,0,.25);border-radius:999px;padding:8px 14px}
+.ticker-track{flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ticker-move{display:flex;gap:12px;width:max-content;animation:tick 45s linear infinite}
+.ticker:hover .ticker-move{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fffdf7;color:var(--dark);border-radius:999px;padding:8px 16px 8px 8px;font-weight:600;font-size:15px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.chip i{font-style:normal;width:30px;height:30px;border-radius:50%;background:#e9f2e6;display:flex;align-items:center;justify-content:center;font-size:16px}
 /* walking cows along the bottom of the hero */
 .pasture{position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none}
 .pasture .grass{position:absolute;left:0;right:0;bottom:0;height:46px;background:#8fb996;border-radius:60% 60% 0 0/40px 40px 0 0;opacity:.9}
@@ -179,11 +187,7 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
   <div class="stat"><b data-count="8.9" data-prefix="+" data-suffix=" %" data-dec="1">+8.9 %</b><span>best ML model vs reference, held-out data</span></div>
   <div class="stat"><b data-count="124" data-suffix=" / 124">124 / 124</b><span>end-to-end checks · 169 tests pass</span></div>
 </div></div>
-<div class="pasture" aria-hidden="true"><div class="grass"></div>
-  <div class="walker w1"><svg viewBox="0 0 120 80"><g fill="#fffdf7" stroke="#1f2a22" stroke-width="2.5"><rect x="18" y="26" width="68" height="32" rx="15"/><rect x="25" y="52" width="7" height="20" rx="3"/><rect x="37" y="52" width="7" height="20" rx="3"/><rect x="64" y="52" width="7" height="20" rx="3"/><rect x="76" y="52" width="7" height="20" rx="3"/><rect x="88" y="14" width="22" height="24" rx="10"/></g><path d="M34 32c6-4 14-2 15 4s-6 10-12 8-8-8-3-12zM62 30c5-1 9 3 8 8s-7 6-10 2-3-9 2-10z" fill="#1f2a22"/><rect x="96" y="28" width="18" height="13" rx="6.5" fill="#f2a7a0" stroke="#1f2a22" stroke-width="2"/><circle cx="99" cy="22" r="2.4" fill="#1f2a22"/><path d="M52 57c0 6 4 9 8 9s8-3 8-9z" fill="#f2a7a0"/></svg></div>
-  <div class="walker w2"><svg viewBox="0 0 120 80"><g fill="#fffdf7" stroke="#1f2a22" stroke-width="2.5"><rect x="18" y="26" width="68" height="32" rx="15"/><rect x="25" y="52" width="7" height="20" rx="3"/><rect x="37" y="52" width="7" height="20" rx="3"/><rect x="64" y="52" width="7" height="20" rx="3"/><rect x="76" y="52" width="7" height="20" rx="3"/><rect x="88" y="14" width="22" height="24" rx="10"/></g><path d="M40 29c7 0 10 6 6 10s-12 2-11-3 1-7 5-7zM64 40c4-2 9 1 8 5s-7 5-9 1 0-5 1-6z" fill="#8a5a3b"/><rect x="96" y="28" width="18" height="13" rx="6.5" fill="#f2a7a0" stroke="#1f2a22" stroke-width="2"/><circle cx="99" cy="22" r="2.4" fill="#1f2a22"/></svg></div>
-  <div class="walker w3"><svg viewBox="0 0 120 80"><g fill="#fffdf7" stroke="#1f2a22" stroke-width="2.5"><rect x="18" y="26" width="68" height="32" rx="15"/><rect x="25" y="52" width="7" height="20" rx="3"/><rect x="37" y="52" width="7" height="20" rx="3"/><rect x="64" y="52" width="7" height="20" rx="3"/><rect x="76" y="52" width="7" height="20" rx="3"/><rect x="88" y="14" width="22" height="24" rx="10"/></g><path d="M28 30c8-3 12 4 9 10s-11 3-11-2 0-7 2-8zM52 40c6-3 12 0 11 6s-9 6-12 2-2-6 1-8z" fill="#1f2a22"/><rect x="96" y="28" width="18" height="13" rx="6.5" fill="#f2a7a0" stroke="#1f2a22" stroke-width="2"/><circle cx="99" cy="22" r="2.4" fill="#1f2a22"/></svg></div>
-</div></header>
+<div class="ticker" aria-label="What the agent checks on every cow"><div class="ticker-label">On every cow</div><div class="ticker-track"><div class="ticker-move"><span class="chip"><i>🥛</i>Milk score vs herd curve</span><span class="chip"><i>🩺</i>Health score</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>🤰</i>Pregnancy status</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>🔁</i>Culling priority</span><span class="chip"><i>📅</i>Expected calving & dry-off</span><span class="chip"><i>🧪</i>Somatic cells</span><span class="chip"><i>🦶</i>Lameness check</span><span class="chip"><i>📈</i>ML milk forecast</span><span class="chip"><i>🔥</i>Ketosis & acidosis risk</span><span class="chip"><i>⏱️</i>Every 4 minutes</span><span class="chip"><i>🥛</i>Milk score vs herd curve</span><span class="chip"><i>🩺</i>Health score</span><span class="chip"><i>💊</i>Antibiotic withdrawal</span><span class="chip"><i>🤰</i>Pregnancy status</span><span class="chip"><i>📉</i>Milk-drop alert</span><span class="chip"><i>🔁</i>Culling priority</span><span class="chip"><i>📅</i>Expected calving & dry-off</span><span class="chip"><i>🧪</i>Somatic cells</span><span class="chip"><i>🦶</i>Lameness check</span><span class="chip"><i>📈</i>ML milk forecast</span><span class="chip"><i>🔥</i>Ketosis & acidosis risk</span><span class="chip"><i>⏱️</i>Every 4 minutes</span></div></div></div></div></header>
 
 <section class="green" id="goal"><div class="wrap reveal">
   <p class="eyebrow">Our goal</p>
