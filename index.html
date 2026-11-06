@@ -28,6 +28,13 @@ h2{font-size:clamp(32px,5vw,52px);color:var(--dark)}
 .btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
 .btn.primary{background:var(--gold);color:var(--dark)}.btn.ghost{border:2px solid var(--gold);color:var(--gold)}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.brand{font:700 22px Oswald,Arial,sans-serif;color:var(--gold);letter-spacing:.04em}
+.me-chip{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 6px 5px 5px;color:var(--cream);text-decoration:none;transition:transform .2s,background .2s}
+.me-chip:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
+.me-chip img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 18%;border:3px solid var(--gold)}
+.me-chip span{display:flex;flex-direction:column;line-height:1.15}.me-chip b{font-size:16px}.me-chip small{font-size:12px;color:#cfe3c4}
+.me-chip i{font-style:normal;font-weight:800;font-size:15px;background:#0a66c2;color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .live{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-size:14px;margin-bottom:16px}
 .live i{width:9px;height:9px;border-radius:50%;background:#7cfc9a;animation:pulse 1.6s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,252,154,.7)}70%{box-shadow:0 0 0 10px rgba(124,252,154,0)}100%{box-shadow:0 0 0 0 rgba(124,252,154,0)}}
@@ -158,7 +165,10 @@ footer{padding:40px 0;font-size:15px;color:var(--muted)}
 </style>
 </head>
 <body>
-<header class="hero"><div class="wrap hero-grid">
+<header class="hero"><div class="wrap topbar"><span class="brand">DairyTwin</span>
+  <a class="me-chip" href="https://www.linkedin.com/in/jansaro/" target="_blank" rel="noopener" title="Jan Saro on LinkedIn">
+    <img src="img/jan_saro_fw.jpg" alt="Jan Saro"><span><b>Jan Saro</b><small>Applied AI</small></span><i>in</i></a></div>
+  <div class="wrap hero-grid">
   <div>
     <span class="live"><i></i> agents checking the herd every 4 minutes</span>
     <p class="eyebrow">Agro Pitch Brussels · real data of a Czech dairy farm</p>
